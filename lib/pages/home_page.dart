@@ -3,7 +3,7 @@ import 'package:card_registration_with_hive/service/theme_service.dart';
 import 'package:flutter/material.dart';
 
 import '../model/card_model.dart';
-import '../service/hive_service.dart';
+import '../service/prefs.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
   static const String id = "home_page";
@@ -26,14 +26,14 @@ class _HomePageState extends State<HomePage> {
 
     if(cardNumber.isNotEmpty && name.isNotEmpty && date.isNotEmpty && cvc.isNotEmpty) {
       // read users
-      List<CardModel> cards = HiveService.readCards();
+      List<CardModel> cards = await PrefService.readCards();
       CardModel card = CardModel(cards.length + 1, cardNumber, name, date, cvc);
 
       // add user to users list
       cards.add(card);
 
       // store users
-      await HiveService.setCards(cards);
+      await PrefService.setCards(cards);
 
       // close page
       openPage();
@@ -182,6 +182,7 @@ class _HomePageState extends State<HomePage> {
                                   child:  TextField(
                                     controller: cvcController,
                                     decoration: const InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(horizontal: 10),
                                       border: InputBorder.none,
                                     ),
                                   ),

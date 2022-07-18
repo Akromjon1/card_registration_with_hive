@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter_credit_card: ^3.0.1
   hive_flutter: ^1.1.0
+  shared_preferences: 
 
 dev_dependencies:
   flutter_test:

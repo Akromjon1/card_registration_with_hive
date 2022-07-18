@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import '../model/card_model.dart';
 import '../service/hive_service.dart';
+import '../service/prefs.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({Key? key}) : super(key: key);
@@ -30,7 +31,7 @@ class _CardPageState extends State<CardPage> {
     items.remove(card);
 
 
-    await HiveService.setCards(items);
+    await PrefService.setCards(items);
     /// 1, 2, 3
     /// 1, 2
     ///
@@ -43,7 +44,7 @@ class _CardPageState extends State<CardPage> {
     isLoading = true;
     setState(() {});
 
-    items = HiveService.readCards();
+    items = await PrefService.readCards();
     //allUsers = items;
 
     isLoading = false;
@@ -68,6 +69,8 @@ class _CardPageState extends State<CardPage> {
       //   ),
       // ),
       body: ListView.builder(
+        physics: ScrollPhysics(),
+        shrinkWrap: true,
           itemCount: items.length,
           itemBuilder: (context, index){
             return GestureDetector(
@@ -88,6 +91,8 @@ class _CardPageState extends State<CardPage> {
               ),
             );
           }),
+
+
     );
   }
 }

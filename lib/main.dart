@@ -5,10 +5,10 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'pages/home_page.dart';
 import 'service/hive_service.dart';
 
-void main() async{
+void main(){
   WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter();
-  await Hive.openBox(HiveService.dbName);
+  // await Hive.initFlutter();
+  // await Hive.openBox(HiveService.dbName);
   runApp(const MyApp());
 }
 
